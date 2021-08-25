@@ -1,0 +1,11 @@
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\bin\Debug\SuperBuster.exe.config
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\bin\Debug\SuperBuster.exe
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\bin\Debug\SuperBuster.pdb
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.Form1.resources
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.Properties.Resources.resources
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.exe
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.pdb
+C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.CopyComplete
