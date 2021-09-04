@@ -37,23 +37,16 @@ namespace SuperBuster
         }
         private void IncludeUser()
         {
-            label2.Text = "正在导入用户名字典......";
+            label3.Text = "正在导入用户名字典......";
             openFileDialog1.Filter = "文本文档|*.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 users = File.ReadAllLines(openFileDialog1.FileName);
-                int i = 0;
-                richTextBox1.Clear();
-                while (i < users.Length)
-                {
-                    richTextBox1.Text += users[i] + "\r";
-                    i++;
-                }
-                label2.Text = "用户名字典已导入！";
+                label3.Text = "用户名字典已导入！";
             }
             else
             {
-                label2.Text = "导入已取消！";
+                label3.Text = "导入已取消！";
             }
         }
 
@@ -65,23 +58,16 @@ namespace SuperBuster
         }
         private void IncludePassword()
         {
-            label2.Text = "正在导入密码字典......";
+            label3.Text = "正在导入密码字典......";
             openFileDialog1.Filter = "文本文档|*.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 passwords = File.ReadAllLines(openFileDialog1.FileName);
-                int i = 0;
-                richTextBox2.Clear();
-                while (i < passwords.Length)
-                {
-                    richTextBox2.Text += passwords[i] + "\r";
-                    i++;
-                }
-                label2.Text = "密码字典已导入！";
+                label3.Text = "密码字典已导入！";
             }
             else
             {
-                label2.Text = "导入已取消！";
+                label3.Text = "导入已取消！";
             }
         }
 
@@ -91,20 +77,21 @@ namespace SuperBuster
             {
                 MessageBox.Show("请输入目标主机！", "提示");
             }
-            else if (richTextBox1.Text == "")
+            else if (users[0] == "")
             {
                 MessageBox.Show("请导入用户名字典！", "提示");
             }
-            else if (richTextBox2.Text == "")
+            else if (passwords[0] == "")
             {
                 MessageBox.Show("请导入密码字典！", "提示");
             }
             else if (button3.Text == "停止爆破")
             {
                 button3.Text = "开始爆破";
-                label2.Text = "";
+                label3.Text = "";
                 RequestIds[currentrequestId] = false;
                 textBox1.Enabled = true;
+                textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
@@ -120,6 +107,7 @@ namespace SuperBuster
                 if (radioButton1.Checked)
                 {
                     textBox1.Enabled = false;
+                    textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
                     radioButton1.Enabled = false;
@@ -127,7 +115,7 @@ namespace SuperBuster
                     radioButton3.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
-                    label2.Text = "正在进行FTP爆破......";
+                    label3.Text = "正在进行FTP爆破......";
                     MessageBox.Show("开始FTP爆破！", "提示");
                     button3.Text = "停止爆破";
                     Thread thread2 = new Thread(new ThreadStart(FTPBomb));
@@ -136,6 +124,7 @@ namespace SuperBuster
                 else if (radioButton2.Checked)
                 {
                     textBox1.Enabled = false;
+                    textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
                     radioButton1.Enabled = false;
@@ -143,7 +132,7 @@ namespace SuperBuster
                     radioButton3.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
-                    label2.Text = "正在进行SSH爆破......";
+                    label3.Text = "正在进行SSH爆破......";
                     MessageBox.Show("开始SSH爆破！", "提示");
                     button3.Text = "停止爆破";
                     Thread thread3 = new Thread(new ThreadStart(SSHBomb));
@@ -152,6 +141,7 @@ namespace SuperBuster
                 else if (radioButton3.Checked)
                 {
                     textBox1.Enabled = false;
+                    textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
                     radioButton1.Enabled = false;
@@ -159,7 +149,7 @@ namespace SuperBuster
                     radioButton3.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
-                    label2.Text = "正在进行MySQL爆破......";
+                    label3.Text = "正在进行MySQL爆破......";
                     MessageBox.Show("开始MySQL爆破！", "提示");
                     button3.Text = "停止爆破";
                     Thread thread4 = new Thread(new ThreadStart(MySQLBomb));
@@ -183,6 +173,10 @@ namespace SuperBuster
                 for (int y = 0; y < passwords.Length; y++)
                 {
                     int Y = y;
+                    if(TaskList.Count>=Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
                         if (RequestIds[a])
@@ -199,9 +193,10 @@ namespace SuperBuster
                                             RequestIds[a] = false;
                                             richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
                                             button3.Text = "开始爆破";
-                                            label2.Text = "";
+                                            label3.Text = "";
                                             richTextBox3.Text += "爆破结束！";
                                             textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
                                             radioButton1.Enabled = true;
@@ -239,9 +234,10 @@ namespace SuperBuster
             if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
-                label2.Text = "";
+                label3.Text = "";
                 richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
+                textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
@@ -279,6 +275,10 @@ namespace SuperBuster
                 for (int y = 0; y < passwords.Length; y++)
                 {
                     int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
                         if(RequestIds[a])
@@ -295,9 +295,10 @@ namespace SuperBuster
                                             RequestIds[a] = false;
                                             richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
                                             button3.Text = "开始爆破";
-                                            label2.Text = "";
+                                            label3.Text = "";
                                             richTextBox3.Text += "爆破结束！";
                                             textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
                                             radioButton1.Enabled = true;
@@ -335,9 +336,10 @@ namespace SuperBuster
             if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
-                label2.Text = "";
+                label3.Text = "";
                 richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
+                textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
@@ -376,6 +378,10 @@ namespace SuperBuster
                 for (int y = 0; y < passwords.Length; y++)
                 {
                     int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
                     TaskList.Add(Task.Factory.StartNew(() =>
                     {
                         if(RequestIds[a])
@@ -392,9 +398,10 @@ namespace SuperBuster
                                             RequestIds[a] = false;
                                             richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
                                             button3.Text = "开始爆破";
-                                            label2.Text = "";
+                                            label3.Text = "";
                                             richTextBox3.Text += "爆破结束！";
                                             textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
                                             radioButton1.Enabled = true;
@@ -433,9 +440,10 @@ namespace SuperBuster
             if (RequestIds[a])
             {
                 button3.Text = "开始爆破";
-                label2.Text = "";
+                label3.Text = "";
                 richTextBox3.Text += "爆破结束！";
                 textBox1.Enabled = true;
+                textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 radioButton1.Enabled = true;
