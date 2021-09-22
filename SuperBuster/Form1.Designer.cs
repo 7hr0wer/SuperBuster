@@ -37,32 +37,34 @@ namespace SuperBuster
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(530, 25);
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(541, 25);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(127, 53);
-            this.button3.TabIndex = 7;
+            this.button3.TabIndex = 6;
             this.button3.Text = "开始爆破";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(273, 25);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 22);
+            this.button1.Size = new System.Drawing.Size(109, 22);
             this.button1.TabIndex = 2;
             this.button1.Text = "导入用户名字典";
             this.button1.UseVisualStyleBackColor = true;
@@ -70,9 +72,10 @@ namespace SuperBuster
             // 
             // button2
             // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(273, 56);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 22);
+            this.button2.Size = new System.Drawing.Size(109, 22);
             this.button2.TabIndex = 3;
             this.button2.Text = "导入密码字典";
             this.button2.UseVisualStyleBackColor = true;
@@ -90,56 +93,23 @@ namespace SuperBuster
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "目标主机：";
+            this.label1.Text = "目标：";
             // 
             // richTextBox3
             // 
             this.richTextBox3.Location = new System.Drawing.Point(23, 100);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(634, 237);
-            this.richTextBox3.TabIndex = 8;
+            this.richTextBox3.Size = new System.Drawing.Size(645, 237);
+            this.richTextBox3.TabIndex = 7;
             this.richTextBox3.Text = "";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(377, 28);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(41, 16);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "FTP";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(424, 28);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(41, 16);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "SSH";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(471, 28);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(53, 16);
-            this.radioButton3.TabIndex = 6;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "MySQL";
-            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(604, 340);
+            this.linkLabel1.Location = new System.Drawing.Point(615, 340);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(53, 12);
             this.linkLabel1.TabIndex = 10;
@@ -150,7 +120,7 @@ namespace SuperBuster
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(527, 340);
+            this.linkLabel2.Location = new System.Drawing.Point(538, 340);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(71, 12);
             this.linkLabel2.TabIndex = 9;
@@ -163,10 +133,10 @@ namespace SuperBuster
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(377, 59);
+            this.checkBox1.Location = new System.Drawing.Point(388, 59);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(132, 16);
-            this.checkBox1.TabIndex = 11;
+            this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "爆破成功一次后停止";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -176,7 +146,7 @@ namespace SuperBuster
             this.label2.Location = new System.Drawing.Point(21, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 12);
-            this.label2.TabIndex = 13;
+            this.label2.TabIndex = 11;
             this.label2.Text = "Task最大并发数量：";
             // 
             // textBox2
@@ -184,7 +154,8 @@ namespace SuperBuster
             this.textBox2.Location = new System.Drawing.Point(131, 57);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(136, 21);
-            this.textBox2.TabIndex = 14;
+            this.textBox2.TabIndex = 12;
+            this.textBox2.Text = "1000";
             // 
             // label3
             // 
@@ -194,20 +165,59 @@ namespace SuperBuster
             this.label3.Size = new System.Drawing.Size(0, 12);
             this.label3.TabIndex = 12;
             // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(21, 340);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(281, 12);
+            this.linkLabel3.TabIndex = 8;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "梦的挖掘机碾碎黎明的炊烟，冰和雾遮住我的双眼。";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "FTP",
+            "SSH",
+            "MySQL",
+            "IMAP",
+            "IMAP_SSL",
+            "SMTP",
+            "SMTP_SSL"});
+            this.comboBox1.Location = new System.Drawing.Point(388, 27);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(132, 20);
+            this.comboBox1.TabIndex = 4;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(479, 340);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel4.TabIndex = 13;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "检查更新";
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 363);
+            this.ClientSize = new System.Drawing.Size(690, 363);
+            this.Controls.Add(this.linkLabel4);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
@@ -218,7 +228,7 @@ namespace SuperBuster
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "SuperBuster V0.3 测试版[20210903]";
+            this.Text = "SuperBuster V0.4 测试版[20210922]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -234,15 +244,15 @@ namespace SuperBuster
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.LinkLabel linkLabel4;
     }
 }
 
