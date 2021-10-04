@@ -9,3 +9,14 @@ C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuste
 C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.exe
 C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.pdb
 C:\Users\Administrator\source\repos\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.CopyComplete
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.AssemblyReference.cache
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.Form1.resources
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.Properties.Resources.resources
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.GenerateResource.cache
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.CoreCompileInputs.cache
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.exe
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.pdb
+E:\SuperBuster\SuperBuster\bin\Debug\SuperBuster.exe.config
+E:\SuperBuster\SuperBuster\bin\Debug\SuperBuster.exe
+E:\SuperBuster\SuperBuster\bin\Debug\SuperBuster.pdb
+E:\SuperBuster\SuperBuster\obj\Debug\SuperBuster.csproj.CopyComplete

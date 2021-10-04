@@ -51,9 +51,10 @@ namespace SuperBuster
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(541, 25);
+            this.button3.Location = new System.Drawing.Point(1082, 50);
+            this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(127, 53);
+            this.button3.Size = new System.Drawing.Size(254, 106);
             this.button3.TabIndex = 6;
             this.button3.Text = "开始爆破";
             this.button3.UseVisualStyleBackColor = true;
@@ -62,9 +63,10 @@ namespace SuperBuster
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(273, 25);
+            this.button1.Location = new System.Drawing.Point(546, 50);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 22);
+            this.button1.Size = new System.Drawing.Size(218, 44);
             this.button1.TabIndex = 2;
             this.button1.Text = "导入用户名字典";
             this.button1.UseVisualStyleBackColor = true;
@@ -73,9 +75,10 @@ namespace SuperBuster
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(273, 56);
+            this.button2.Location = new System.Drawing.Point(546, 112);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 22);
+            this.button2.Size = new System.Drawing.Size(218, 44);
             this.button2.TabIndex = 3;
             this.button2.Text = "导入密码字典";
             this.button2.UseVisualStyleBackColor = true;
@@ -83,35 +86,39 @@ namespace SuperBuster
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(131, 25);
+            this.textBox1.Location = new System.Drawing.Point(262, 50);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 21);
+            this.textBox1.Size = new System.Drawing.Size(268, 35);
             this.textBox1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 28);
+            this.label1.Location = new System.Drawing.Point(42, 56);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(82, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "目标：";
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(23, 100);
+            this.richTextBox3.Location = new System.Drawing.Point(46, 200);
+            this.richTextBox3.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(645, 237);
+            this.richTextBox3.Size = new System.Drawing.Size(1286, 470);
             this.richTextBox3.TabIndex = 7;
             this.richTextBox3.Text = "";
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(615, 340);
+            this.linkLabel1.Location = new System.Drawing.Point(1230, 680);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel1.Size = new System.Drawing.Size(106, 24);
             this.linkLabel1.TabIndex = 10;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "源码下载";
@@ -120,9 +127,10 @@ namespace SuperBuster
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(538, 340);
+            this.linkLabel2.Location = new System.Drawing.Point(1076, 680);
+            this.linkLabel2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(71, 12);
+            this.linkLabel2.Size = new System.Drawing.Size(142, 24);
             this.linkLabel2.TabIndex = 9;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Bug&建议反馈";
@@ -133,9 +141,10 @@ namespace SuperBuster
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(388, 59);
+            this.checkBox1.Location = new System.Drawing.Point(776, 118);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(6);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(132, 16);
+            this.checkBox1.Size = new System.Drawing.Size(258, 28);
             this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "爆破成功一次后停止";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -143,34 +152,38 @@ namespace SuperBuster
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 60);
+            this.label2.Location = new System.Drawing.Point(42, 120);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 12);
+            this.label2.Size = new System.Drawing.Size(226, 24);
             this.label2.TabIndex = 11;
             this.label2.Text = "Task最大并发数量：";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(131, 57);
+            this.textBox2.Location = new System.Drawing.Point(262, 114);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(136, 21);
+            this.textBox2.Size = new System.Drawing.Size(268, 35);
             this.textBox2.TabIndex = 12;
             this.textBox2.Text = "1000";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 85);
+            this.label3.Location = new System.Drawing.Point(42, 170);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 12);
+            this.label3.Size = new System.Drawing.Size(0, 24);
             this.label3.TabIndex = 12;
             // 
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(21, 340);
+            this.linkLabel3.Location = new System.Drawing.Point(42, 680);
+            this.linkLabel3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(281, 12);
+            this.linkLabel3.Size = new System.Drawing.Size(562, 24);
             this.linkLabel3.TabIndex = 8;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "梦的挖掘机碾碎黎明的炊烟，冰和雾遮住我的双眼。";
@@ -187,18 +200,23 @@ namespace SuperBuster
             "IMAP",
             "IMAP_SSL",
             "SMTP",
-            "SMTP_SSL"});
-            this.comboBox1.Location = new System.Drawing.Point(388, 27);
+            "SMTP_SSL",
+            "POP3",
+            "POP3_SSL",
+            "HTTP_WebProxy"});
+            this.comboBox1.Location = new System.Drawing.Point(776, 54);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(132, 20);
+            this.comboBox1.Size = new System.Drawing.Size(260, 32);
             this.comboBox1.TabIndex = 4;
             // 
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(479, 340);
+            this.linkLabel4.Location = new System.Drawing.Point(958, 680);
+            this.linkLabel4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel4.Size = new System.Drawing.Size(106, 24);
             this.linkLabel4.TabIndex = 13;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "检查更新";
@@ -206,9 +224,9 @@ namespace SuperBuster
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 363);
+            this.ClientSize = new System.Drawing.Size(1380, 726);
             this.Controls.Add(this.linkLabel4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.linkLabel3);
@@ -226,9 +244,10 @@ namespace SuperBuster
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "SuperBuster V0.4 测试版[20210922]";
+            this.Text = "SuperBuster V0.5 测试版[2021国庆]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
