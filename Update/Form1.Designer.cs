@@ -37,9 +37,10 @@ namespace Update
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(24, 24);
+            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 39);
+            this.button1.Size = new System.Drawing.Size(244, 78);
             this.button1.TabIndex = 0;
             this.button1.Text = "检查更新";
             this.button1.UseVisualStyleBackColor = true;
@@ -48,9 +49,10 @@ namespace Update
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(140, 12);
+            this.button2.Location = new System.Drawing.Point(280, 24);
+            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(122, 39);
+            this.button2.Size = new System.Drawing.Size(244, 78);
             this.button2.TabIndex = 1;
             this.button2.Text = "更新到新版本";
             this.button2.UseVisualStyleBackColor = true;
@@ -58,9 +60,10 @@ namespace Update
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(268, 12);
+            this.button3.Location = new System.Drawing.Point(536, 24);
+            this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(122, 39);
+            this.button3.Size = new System.Drawing.Size(244, 78);
             this.button3.TabIndex = 2;
             this.button3.Text = "退出";
             this.button3.UseVisualStyleBackColor = true;
@@ -69,24 +72,27 @@ namespace Update
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 69);
+            this.label1.Location = new System.Drawing.Point(276, 138);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 12);
+            this.label1.Size = new System.Drawing.Size(0, 24);
             this.label1.TabIndex = 3;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 103);
+            this.ClientSize = new System.Drawing.Size(820, 206);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Update";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

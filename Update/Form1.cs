@@ -20,7 +20,7 @@ namespace Update
         {
             InitializeComponent();
         }
-        string Version = "0.4";
+        string[] Version;
         string b;
         private void button1_Click(object sender, EventArgs e)
         {
@@ -30,10 +30,11 @@ namespace Update
                 {
                     button1.Enabled = false;
                     label1.Text = "正在检查更新......";
+                    Version = File.ReadAllLines("Version.txt");
                     b = HttpGet("https://thrower.cc/SuperBusterLatestVersion.html");
-                    if (b != Version)
+                    if (b != Version[0])
                     {
-                        MessageBox.Show("发现新版本！最新版本为：" + b, "提示");
+                        MessageBox.Show("发现新版本！最新版本为：" + b + " 当前版本为：" + Version[0], "提示");
                         button1.Enabled = true;
                         button2.Enabled = true;
                     }
@@ -45,8 +46,7 @@ namespace Update
                 }
                 catch
                 {
-                    MessageBox.Show("未知错误！", "提示");
-                    button1.Enabled = true;
+                    MessageBox.Show("错误！", "提示");
                 }
                 label1.Text = "";
             });
@@ -91,7 +91,8 @@ namespace Update
                 ZipFile.ExtractToDirectory(Directory.GetCurrentDirectory() + "/Latest.zip", a);
                 File.Delete("Latest.zip");
                 label1.Text = "更新完成！";
-                Version = b;
+                Version[0] = b;
+                File.WriteAllLines("Version.txt", Version);
                 string c = a + "/SuperBuster.exe";
                 Process.Start(c);
                 Environment.Exit(0);
@@ -110,6 +111,27 @@ namespace Update
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (Process.GetProcessesByName("SuperBuster").ToList().Count > 0)
+            {
+                Process[] processes = Process.GetProcesses();
+                foreach(Process p in processes)
+                {
+                    if(p.ProcessName == "SuperBuster")
+                    {
+                        p.CloseMainWindow();
+                    }
+                }
+                TopMost = true;
+            }
+            else
+            {
+                MessageBox.Show("请在主程序中打开更新程序！", "提示");
+                Environment.Exit(0);
+            }
         }
     }
 }

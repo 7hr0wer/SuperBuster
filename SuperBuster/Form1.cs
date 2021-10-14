@@ -80,7 +80,7 @@ namespace SuperBuster
             bool IsNumber = int.TryParse(textBox2.Text, out Number);
             if (textBox1.Text == "")
             {
-                MessageBox.Show("请输入目标主机！", "提示");
+                MessageBox.Show("请输入目标！", "提示");
             }
             else if (textBox2.Text == "")
             {
@@ -250,7 +250,7 @@ namespace SuperBuster
                     Thread thread4 = new Thread(new ThreadStart(POP3_SSLBomb));
                     thread4.Start();
                 }
-                else if (comboBox1.SelectedItem.ToString() == "HTTP_WebProxy")
+                else if (comboBox1.SelectedItem.ToString() == "HTTP_Proxy")
                 {
                     textBox1.Enabled = false;
                     textBox2.Enabled = false;
@@ -259,10 +259,10 @@ namespace SuperBuster
                     comboBox1.Enabled = false;
                     checkBox1.Enabled = false;
                     richTextBox3.Clear();
-                    label3.Text = "正在进行HTTP_WebProxy爆破......";
-                    MessageBox.Show("开始HTTP_WebProxy爆破！", "提示");
+                    label3.Text = "正在进行HTTP_Proxy爆破......";
+                    MessageBox.Show("开始HTTP_Proxy爆破！", "提示");
                     button3.Text = "停止爆破";
-                    Thread thread4 = new Thread(new ThreadStart(WebProxyBomb));
+                    Thread thread4 = new Thread(new ThreadStart(ProxyBomb));
                     thread4.Start();
                 }
                 else
@@ -996,11 +996,11 @@ namespace SuperBuster
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
             try
             {
                 string a = Directory.GetCurrentDirectory() + "/Update/Update.exe";
                 Process.Start(a);
-                Environment.Exit(0);
             }
             catch
             {
@@ -1209,7 +1209,7 @@ namespace SuperBuster
                 pop3.Close();
             }
         }
-        private void WebProxyBomb()
+        private void ProxyBomb()
         {
             currentrequestId++;
             int a = currentrequestId;
@@ -1229,7 +1229,7 @@ namespace SuperBuster
                     {
                         if (RequestIds[a])
                         {
-                            bool result = WebProxyRequest(host, users[l], passwords[Y]);
+                            bool result = ProxyRequest(host, users[l], passwords[Y]);
                             if (result)
                             {
                                 BeginInvoke(new Action(() =>
@@ -1292,7 +1292,7 @@ namespace SuperBuster
                 MessageBox.Show("爆破结束！", "提示");
             }
         }
-        private bool WebProxyRequest(string host,string user,string password)
+        private bool ProxyRequest(string host,string user,string password)
         {
             try
             {

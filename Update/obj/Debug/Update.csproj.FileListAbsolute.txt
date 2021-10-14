@@ -8,3 +8,13 @@ C:\Users\Administrator\source\repos\SuperBuster\Update\obj\Debug\Update.csproj.G
 C:\Users\Administrator\source\repos\SuperBuster\Update\obj\Debug\Update.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\SuperBuster\Update\obj\Debug\Update.exe
 C:\Users\Administrator\source\repos\SuperBuster\Update\obj\Debug\Update.pdb
+E:\SuperBuster\Update\bin\Debug\Update.exe.config
+E:\SuperBuster\Update\bin\Debug\Update.exe
+E:\SuperBuster\Update\bin\Debug\Update.pdb
+E:\SuperBuster\Update\obj\Debug\Update.csproj.AssemblyReference.cache
+E:\SuperBuster\Update\obj\Debug\Update.Form1.resources
+E:\SuperBuster\Update\obj\Debug\Update.Properties.Resources.resources
+E:\SuperBuster\Update\obj\Debug\Update.csproj.GenerateResource.cache
+E:\SuperBuster\Update\obj\Debug\Update.csproj.CoreCompileInputs.cache
+E:\SuperBuster\Update\obj\Debug\Update.exe
+E:\SuperBuster\Update\obj\Debug\Update.pdb
